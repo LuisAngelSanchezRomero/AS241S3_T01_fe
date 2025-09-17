@@ -1,0 +1,84 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="container">
+  <app-side-bar></app-side-bar>
+
+  <div class="product-form-container">
+    <div class="header">
+      <h2>Lista de Productos</h2>
+      <button class="generate-pdf-button" (click)="reportPdf()">
+        <span class="material-icons">picture_as_pdf</span> GENERAR REPORTE
+      </button>
+      <button class="add-button" (click)="addProduct()">
+        <span class="material-icons">add</span> AGREGAR PRODUCTO
+      </button>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <app-product-form *ngIf="isFormVisible" [product]="selectedProduct" (save)="saveProduct($event)"
+      (close)="cancelForm()" [isVisible]="isFormVisible">
+    </app-product-form>
+
+    <div class="table-responsive">
+      <table class="product-table" *ngIf="!isFormVisible">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>ID Proveedor</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Unidad</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th class="actions-header">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products" [class.inactive]="product.status === 'Inactivo'">
+            <td>{{ product.code }}</td>
+            <td>{{ product.providerId }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.unit }}</td>
+            <td>{{ product.price | number: '1.2-2' }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.status }}</td>
+            <td>{{ product.createdDate | date: 'shortDate' }}</td>
+            <td class="actions-cell">
+              <div class="actions">
+                <button class="action-btn edit-btn" (click)="editProduct(product)" title="Editar Producto"
+                  [disabled]="product.status === 'Inactivo'">
+                  <span class="material-icons">edit</span>
+                </button>
+
+                <button *ngIf="product.status === 'Activo'" class="action-btn delete-btn"
+                  (click)="deleteProduct(product.code)" title="Eliminar Lógicamente">
+                  <span class="material-icons">delete</span>
+                </button>
+
+                <button *ngIf="product.status === 'Inactivo'" class="action-btn restore-btn"
+                  (click)="restoreProduct(product.code)" title="Restaurar Producto">
+                  <span class="material-icons">restore</span>
+                </button>
+
+                <button class="action-btn delete-physical-btn" (click)="deleteProductPhysical(product.code)"
+                  title="Eliminar Físicamente">
+                  <span class="material-icons">delete_forever</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

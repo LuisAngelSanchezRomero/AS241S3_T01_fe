@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+.sidebar {
+    font-family: 'Montserrat', sans-serif;
+    background: #f3ede6;
+    width: 250px;
+    min-height: 100vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    transition: all 0.3s ease;
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+
+        .bar {
+            width: 5px;
+            height: 24px;
+            background-color: #ffc107;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #000;
+        }
+    }
+
+    .profile {
+        text-align: center;
+
+        img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        p {
+            color: #ffba00;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+    }
+
+    .menu {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s ease;
+
+            i {
+                font-size: 1.1rem;
+            }
+
+            &.active,
+            &:hover {
+                background-color: #ffba00;
+                color: white;
+
+                i {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .logout {
+        margin-top: auto;
+
+        a {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            border-top: 1px solid #ddd;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+            margin-bottom: 20%;
+
+            &:hover {
+                color: #d9534f;
+            }
+
+            i {
+                font-size: 1.1rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,94 @@
+<div class="modal-overlay" *ngIf="isVisible">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{ isEditing ? 'Editar Producto' : 'Agregar Nuevo Producto' }}</h2>
+      <button type="button" class="close-button" (click)="closeForm()">×</button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="code">Código</label>
+          <input type="text" id="code" formControlName="code" [readonly]="isEditing">
+          <div *ngIf="productForm.get('code')?.invalid && productForm.get('code')?.touched" class="error-message">
+            <span *ngIf="productForm.get('code')?.errors?.['required']">El código es obligatorio.</span>
+            <span *ngIf="productForm.get('code')?.errors?.['minlength']">Mínimo 3 caracteres.</span>
+            <span *ngIf="productForm.get('code')?.errors?.['maxlength']">Máximo 50 caracteres.</span>
+          </div>
+        </div>
+
+        <!-- CAMBIO: Campo añadido para el ID del Proveedor -->
+        <div class="form-group">
+          <label for="providerId">ID del Proveedor</label>
+          <input type="number" id="providerId" formControlName="providerId" min="1">
+          <div *ngIf="productForm.get('providerId')?.invalid && productForm.get('providerId')?.touched" class="error-message">
+            <span *ngIf="productForm.get('providerId')?.errors?.['required']">El ID del proveedor es obligatorio.</span>
+            <span *ngIf="productForm.get('providerId')?.errors?.['min']">El ID debe ser un número positivo.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" formControlName="name">
+          <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched" class="error-message">
+            <span *ngIf="productForm.get('name')?.errors?.['required']">El nombre es obligatorio.</span>
+            <span *ngIf="productForm.get('name')?.errors?.['pattern']">Solo letras y espacios.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea id="description" formControlName="description"></textarea>
+          <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched" class="error-message">
+            <span *ngIf="productForm.get('description')?.errors?.['required']">La descripción es obligatoria.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="unit">Unidad de Medida</label>
+          <select id="unit" formControlName="unit">
+            <option value="">Seleccione una opción</option>
+            <option value="Kg">Kg</option>
+            <option value="unidad">Unidad</option>
+            <option value="lata">Lata</option>
+          </select>
+          <div *ngIf="productForm.get('unit')?.invalid && productForm.get('unit')?.touched" class="error-message">
+            <span *ngIf="productForm.get('unit')?.errors?.['required']">La unidad es obligatoria.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="price">Precio</label>
+          <input type="number" id="price" formControlName="price" step="0.01" min="0.01">
+          <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="error-message">
+            <span *ngIf="productForm.get('price')?.errors?.['required']">El precio es obligatorio.</span>
+            <span *ngIf="productForm.get('price')?.errors?.['min']">Mínimo 0.01.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock</label>
+          <input type="number" id="stock" formControlName="stock" min="0">
+          <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched" class="error-message">
+            <span *ngIf="productForm.get('stock')?.errors?.['required']">El stock es obligatorio.</span>
+            <span *ngIf="productForm.get('stock')?.errors?.['min']">No puede ser negativo.</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Estado</label>
+          <select id="status" formControlName="status">
+            <option value="Activo">Activo</option>
+            <option value="Inactivo">Inactivo</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="save-button" [disabled]="productForm.invalid">
+            {{ isEditing ? 'Guardar Cambios' : 'Guardar' }}
+          </button>
+          <button type="button" class="cancel-button" (click)="closeForm()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

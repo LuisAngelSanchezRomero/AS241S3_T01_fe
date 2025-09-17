@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" />
+<aside class="sidebar">
+    <div class="logo">
+        <span class="bar"></span>
+        <h1>PRINCIPAL</h1>
+    </div>
+
+    <div class="profile">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User Profile">
+        <h2>ADMIN USER</h2>
+        <p>Admin</p>
+    </div>
+
+    <nav class="menu">
+        <a routerLink="/dashboard" routerLinkActive="active">
+            <i class="fas fa-home"></i><span>Principal</span>
+        </a>
+        <a routerLink="/clientes" routerLinkActive="active">
+            <i class="fas fa-user-friends"></i><span>Clientes</span>
+        </a>
+        <a routerLink="/compras" routerLinkActive="active">
+            <i class="fas fa-shopping-cart"></i><span>Compras</span>
+        </a>
+        <a routerLink="/ventas" routerLinkActive="active">
+            <i class="fas fa-chart-line"></i><span>Ventas</span>
+        </a>
+        <a routerLink="/reportes" routerLinkActive="active">
+            <i class="fas fa-file-alt"></i><span>Reportes</span>
+        </a>
+        <a routerLink="/ajustes" routerLinkActive="active">
+            <i class="fas fa-cog"></i><span>Ajustes</span>
+        </a>
+    </nav>
+
+    <div class="logout">
+        <a href="#">
+            <span>Cerrar Sesión</span>
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </div>
+</aside>
